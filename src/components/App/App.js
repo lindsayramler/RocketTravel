@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.style.scss";
 
 import hotelResultService from "../../services/hotel-result/hotel-result.service";
+import hotelPlaceholderImage from "../../assets/hotel-placeholder.png";
 
 const filterOptions = [
   {
@@ -23,11 +24,18 @@ const App = () => {
   const [hotels, setHotels] = useState([]);
   const [priceFilterValue, setPriceFilterValue] = useState("recommended");
   const [searchTerm, setSearchTerm] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getHotels = () => {
     hotelResultService.get().then((response) => {
-      setOriginalHotels(response.results.hotels);
-      setHotels(response.results.hotels);
+      if (response.success) {
+        setOriginalHotels(response.results.hotels);
+        setHotels(response.results.hotels);
+      } else {
+        setErrorMessage(
+          "We're unable to fetch data right now. Please try again later."
+        );
+      }
     });
   };
 
@@ -59,6 +67,10 @@ const App = () => {
         hotel.hotelStaticContent.name.includes(capitalizeSearchTerm)
       );
     }
+    newHotels.length < 1 &&
+    (priceFilterValue !== "recommended" || searchTerm.length > 0)
+      ? setErrorMessage("Your query produced no results. Try again.")
+      : setErrorMessage("");
     setHotels(newHotels);
   };
 
@@ -98,38 +110,46 @@ const App = () => {
           </div>
         </div>
 
-        <div className="hotel-list">
-          {hotels.map((hotel) => (
-            <div className="hotel-card" key={hotel.id}>
-              <div
-                className="image"
-                style={{
-                  backgroundImage: `url(${hotel.hotelStaticContent.mainImage.url})`,
-                }}
-              ></div>
-              <div className="hotel-details">
-                <div className="hotel-name">
-                  {hotel.hotelStaticContent.name}
+        {errorMessage.length > 0 ? (
+          <h1>{errorMessage}</h1>
+        ) : (
+          <div className="hotel-list">
+            {hotels &&
+              hotels.map((hotel) => (
+                <div className="hotel-card" key={hotel.id}>
+                  <div className="hotel-image">
+                    <img
+                      src={hotel.hotelStaticContent.mainImage.url}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = `${hotelPlaceholderImage}`;
+                      }}
+                    />
+                  </div>
+                  <div className="hotel-details">
+                    <div className="hotel-name">
+                      {hotel.hotelStaticContent.name}
+                    </div>
+                    <div className="location">
+                      {hotel.hotelStaticContent.neighborhoodName}
+                    </div>
+                  </div>
+                  <div className="price-details">
+                    <span className="price">
+                      <span
+                        dangerouslySetInnerHTML={{
+                          __html: hotel.lowestAveragePrice.symbol,
+                        }}
+                      ></span>
+                      {hotel.lowestAveragePrice.amount}
+                    </span>
+                    <span className="rewards">{hotel.rewards.miles} miles</span>
+                    <button className="button">Select</button>
+                  </div>
                 </div>
-                <div className="location">
-                  {hotel.hotelStaticContent.neighborhoodName}
-                </div>
-              </div>
-              <div className="price-details">
-                <span className="price">
-                  <span
-                    dangerouslySetInnerHTML={{
-                      __html: hotel.lowestAveragePrice.symbol,
-                    }}
-                  ></span>
-                  {hotel.lowestAveragePrice.amount}
-                </span>
-                <span className="rewards">{hotel.rewards.miles} miles</span>
-                <button className="button">Select</button>
-              </div>
-            </div>
-          ))}
-        </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );
