@@ -1,4 +1,4 @@
-.content {
+.app-container {
   display: flex;
   align-items: flex-start;
   padding: 20px;
@@ -64,6 +64,11 @@
     border-radius: 5px;
     max-width: 250px;
   }
+}
+
+.error-message {
+  margin-top: 30px;
+  text-align: center;
 }
 
 .results {
@@ -151,7 +156,7 @@
 }
 
 @media (max-width: 768px) {
-  .content {
+  .app-container {
     flex-direction: column;
   }
   .filters {
