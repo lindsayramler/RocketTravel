@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.style.scss";
-import { Directory, Filters } from "../";
-
+import { Directory, Filters } from "../../components";
 import hotelResultService from "../../services/hotel-result/hotel-result.service";
 
 const App = () => {

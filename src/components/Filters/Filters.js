@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+
+import resetIcon from "../../assets/icons/reset.png";
 
 const filterOptions = [
   {
@@ -56,15 +59,18 @@ const Filters = ({ originalHotels, updateHotelList, updateErrorMessage }) => {
 
   return (
     <div className="filters">
-      Hotel name
-      <input
-        type="text"
-        className="input"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      Price
-      <div className="price-filter">
+      <div className="search-box" role="search">
+        <input
+          type="text"
+          className="input"
+          placeholder="Search by hotel name"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          role="searchbox"
+        />
+      </div>
+      <p>Filter by:</p>
+      <div className="price-filter" role="switch">
         {filterOptions.map((option) => (
           <div
             key={option.value}
@@ -74,16 +80,28 @@ const Filters = ({ originalHotels, updateHotelList, updateErrorMessage }) => {
                 : "filter-item"
             }
             onClick={() => setPriceFilterValue(option.value)}
+            aria-checked={option.value === priceFilterValue ? "true" : "false"}
           >
             {option.name}
           </div>
         ))}
       </div>
-      <button className="button" onClick={() => clearFilters()}>
-        Reset
-      </button>
+      <div className="reset" onClick={() => clearFilters()} role="button">
+        <img src={resetIcon} className="reset-icon" />
+        Reset all filters
+      </div>
     </div>
   );
+};
+
+Filters.propTypes = {
+  originalHotels: PropTypes.array.isRequired,
+  updateHotelList: PropTypes.func,
+  updateErrorMessage: PropTypes.func,
+};
+
+Filters.defaultProps = {
+  originalHotels: [],
 };
 
 export default Filters;

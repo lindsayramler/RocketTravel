@@ -1,9 +1,9 @@
 .app-container {
   display: flex;
   align-items: flex-start;
-  padding: 20px;
+  padding: 35px 20px;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1100px;
   background: #f5f5f5;
 }
 
@@ -15,18 +15,63 @@
   border-radius: 10px;
   box-shadow: 0 2px 7px -2px rgba(0, 0, 0, 0.12);
 
+  .search-label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
   .input {
-    padding: 0.5rem 1rem;
+    padding: 10px 20px 10px 40px;
     font-size: 1rem;
     width: 100%;
     border-radius: 5px;
-    border: 1px solid #dcdcdc;
-    margin: 10px 0px 20px;
-    font-family: system;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin: 0px 0px 20px;
+    font-family: "Open Sans", sans-serif;
     font-weight: 500;
     outline: 0;
     background: white;
     display: inline-block;
+    height: 46px;
+  }
+
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(0, 0, 0, 0.4);
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .search-box {
+    position: relative;
+  }
+
+  .search-box:before {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    top: 12px;
+    left: 10px;
+    background-image: url("../../assets/icons/search.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: contain;
+    opacity: 0.25;
+  }
+
+  p {
+    font-weight: 600;
   }
 
   .price-filter {
@@ -38,31 +83,29 @@
     padding: 4px 20px 6px;
     margin-right: 10px;
     margin-top: 10px;
-    border: solid 1px #dcdcdc;
+    border: solid 1px rgba(0, 0, 0, 0.05);
     border-radius: 30px;
     background-color: #f5f5f5;
-    color: #3b3b3b;
+    color: #555555;
     cursor: pointer;
   }
 
   .filter-item.active {
-    border: solid 1px #6d6d6d;
-    background-color: #6d6d6d;
+    border: solid 1px transparent;
+    background-color: #777777;
     color: white;
-    font-weight: bold;
   }
 
-  .button {
-    width: 100%;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    background: #6d6d6d;
-    color: white;
+  .reset {
+    display: flex;
+    align-items: center;
+    color: #6dba4a;
     cursor: pointer;
-    padding: 10px;
-    border-radius: 5px;
-    max-width: 250px;
+  }
+
+  .reset-icon {
+    width: 20px;
+    margin-right: 5px;
   }
 }
 
@@ -84,7 +127,7 @@
 .hotel-card {
   background: white;
   display: grid;
-  grid-template-columns: 180px 1fr 25%;
+  grid-template-columns: 160px 1fr 25%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 7px -2px rgba(0, 0, 0, 0.12);
@@ -92,8 +135,8 @@
 
   .hotel-image {
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
     overflow: hidden;
     border-radius: 5px;
   }
@@ -114,32 +157,59 @@
   }
 
   .hotel-name {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 18px;
     line-height: 140%;
     margin-bottom: 5px;
   }
 
   .location {
-    color: #6d6d6d;
-    font-size: 13px;
+    color: #777777;
+  }
+
+  .hotel-stars {
+    margin-bottom: 8px;
+
+    img {
+      width: 16px;
+    }
   }
 
   .price-details {
-    padding: 30px 0px 30px 30px;
+    padding: 10px 0px 0px 30px;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
-    border-left: 1px solid #dcdcdc;
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
   }
 
   .price {
-    font-weight: 500;
+    font-size: 18px;
+    font-weight: 600;
     color: #6dba4a;
+    margin-bottom: 15px;
+
+    span {
+      color: #6dba4a;
+    }
   }
 
   .rewards {
+    display: flex;
+    align-items: center;
     font-weight: 500;
+    padding-bottom: 10px;
+
+    .icon {
+      width: 20px;
+      margin-right: 3px;
+      opacity: 0.3;
+    }
+  }
+
+  .book-button {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
   }
 
   .button {
@@ -151,7 +221,7 @@
     border: 0;
     width: 100%;
     padding: 10px;
-    font-weight: 500;
+    cursor: pointer;
   }
 }
 

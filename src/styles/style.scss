@@ -86,6 +86,22 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #333333;
+}
+
+p,
+span,
+li {
+  color: #777777;
+}
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -127,16 +143,7 @@ table {
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: system;
-  font-style: normal;
-  font-weight: 300;
-  src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"),
-    local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"),
-    local("Roboto-Light"), local("DroidSans"), local("Tahoma");
-}
-
 body {
-  font-family: system;
+  font-family: "Open Sans", sans-serif;
   background-color: #f5f5f5;
 }

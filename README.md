@@ -1,6 +1,9 @@
 # Rocketmiles - React Technical Assesment
 
-## Instructions: 
+for Lindsay Ramler
+
+## Instructions:
+
 See also: instructions.pdf
 
 ## Development Frontend server
@@ -19,13 +22,16 @@ Requires:
 Java 11
 
 #### To Run backend API using gradle
+
 ```bash
 ./gradlew clean bootRun
 ```
 
-####  To Run backend API using Docker
+#### To Run backend API using Docker
+
 - Install [docker](https://docs.docker.com/docker-for-mac/install/)
 - `./boot`
 
-#### Instructions: 
+#### Instructions:
+
 Checkout instructions.pdf
